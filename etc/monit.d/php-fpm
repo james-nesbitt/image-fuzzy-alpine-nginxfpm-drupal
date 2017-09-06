@@ -1,0 +1,8 @@
+# php-fpm monit service file
+
+check process phpfpm with pidfile /var/run/php-fpm.pid
+  start program = "/usr/sbin/php-fpm7"
+  stop  program = "/bin/kill -SIGTERM $(cat /var/run/php-fpm.pid)"
+  if cpu is greater than 40% for 2 cycles then alert
+  if cpu > 60% for 5 cycles then alert 
+  if 10 restarts within 10 cycles then timeout

@@ -1,0 +1,59 @@
+###############################################################################
+## Monit control file
+###############################################################################
+##
+## Comments begin with a '#' and extend through the end of the line. Keywords
+## are case insensitive. All path's MUST BE FULLY QUALIFIED, starting with '/'.
+##
+## Below you will find examples of some frequently used statements. For 
+## information about the control file, a complete list of statements and 
+## options please have a look in the monit manual.
+##
+##
+###############################################################################
+## Global section
+###############################################################################
+##
+## Start monit in the background (run as a daemon):
+#
+set daemon  120           # check services at 2-minute intervals
+    with start delay 240  # optional: delay the first check by 4-minutes
+#                           # (by default check immediately after monit start)
+#
+#
+## Set syslog logging with the 'daemon' facility. If the FACILITY option is
+## omitted, monit will use 'user' facility by default. If you want to log to 
+## a stand alone log file instead, specify the path to a log file
+#
+set logfile syslog facility log_daemon                       
+#
+#
+### Set the location of monit id file which saves the unique id specific for
+### given monit. The id is generated and stored on first monit start.
+### By default the file is placed in $HOME/.monit.id.
+#
+set idfile /var/run/monit.id
+#
+### Set the location of monit state file which saves the monitoring state
+### on each cycle. By default the file is placed in $HOME/.monit.state. If
+### state file is stored on persistent filesystem, monit will recover the
+### monitoring state across reboots. If it is on temporary filesystem, the
+### state will be lost on reboot.
+#
+#set statefile /var/run/monit.state
+#
+## Set the list of mail servers for alert delivery. Multiple servers may be 
+## specified using comma separator. By default monit uses port 25 - this
+## is possible to override with the PORT option.
+#
+set mailserver localhost
+
+###############################################################################
+## Includes
+###############################################################################
+##
+## It is possible to include additional configuration parts from other files or
+## directories.
+#
+
+include /etc/monit.d/*
