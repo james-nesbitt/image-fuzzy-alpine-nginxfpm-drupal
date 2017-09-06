@@ -72,17 +72,6 @@ ENV HOSTNAME phpfpm7
 ENV ENVIRONMENT develop
 
 ####
-# Add Drupal 8 specific folder structure so that it has correct permissions when it is volumized.
-#
-# @DEPRECATED based on use-case, this could be avoided.
-#
-# RUN mkdir -p /app/web/sites/default/files && \
-# chown -R app:app /app
-
-# Expose the php port
-EXPOSE 9000
-
-####
 # Install monit
 #
 RUN apk --no-cache --update add \
